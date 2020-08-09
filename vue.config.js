@@ -1,12 +1,12 @@
-const PROXY = 'http://localhost:8080'
+const PROXY = "http://localhost:8080";
 module.exports = {
-  devServer: { 
+  devServer: {
     proxy: {
-      '^/api': {
-        target: PROXY, 
+      "^/api": {
+        target: PROXY,
         ws: false,
         changeOrigin: true
       }
     }
-  },
-} 
+  }
+};
