@@ -3,37 +3,41 @@
 	************************************************************************* -->
 
 <template>
-  <div id="app">
-    <Main/>
-  </div>
+   <div>
+	   <md-field>
+      <label>Initial Value</label>
+      <md-input v-model="initial"></md-input>
+    </md-field>
+
+    <md-field>
+      <label>Initial Value (Read Only)</label>
+      <md-input v-model="initial" readonly></md-input>
+    </md-field>
+   </div>
 </template>
+
 
 <!-- *************************************************************************
 	SCRIPT
 	************************************************************************* -->
 
-<script>
-import Main from "./components/Main.vue";
 
+<script>
 export default {
-  name: "App",
-  components: {
-    Main
-  }
+  name: "Main",
+  props: {
+	msg: String
+  },
+  data: () => ({
+      initial: 'Initial Value'
+	})
 };
 </script>
+
 
 <!-- *************************************************************************
 	STYLE
 	************************************************************************* -->
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
 </style>
