@@ -3,17 +3,9 @@
 	************************************************************************* -->
 
 <template>
-   <div>
-	   <md-field>
-      <label>Initial Value</label>
-      <md-input v-model="initial"></md-input>
-    </md-field>
-
-    <md-field>
-      <label>Initial Value (Read Only)</label>
-      <md-input v-model="initial" readonly></md-input>
-    </md-field>
-   </div>
+  <div>
+    home worked
+  </div>
 </template>
 
 
