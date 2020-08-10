@@ -39,7 +39,6 @@ export default {
         'accessToken'
       ]),
        isShake: function() {
-      console.log(this.shake);
       if (this.shake == true) {
         return "shake";
       }

@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import Job from "../components/jobs/Job.vue";
 import Login from "../components/account/Login.vue";
 
@@ -9,8 +8,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    redirect: "/jobs"
   },
   {
     path: "/login",

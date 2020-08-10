@@ -8,15 +8,13 @@ Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
   store.dispatch('fetchAccessToken');
   if (to.fullPath === '/jobs') {
-    if (!store.state.accessToken) {
-      next('/login');
+    if (store.state.accessToken === null) {
+      return next('/login');
     }
   }
-  if (to.fullPath === '/login') {
-    if (store.state.accessToken) {
-      next('/jobs');
-    }
-  }
+  if(to.fullPath === '/about')
+    if (!store.state.accessToken)
+      return next('/login')
   next();
 });
 
