@@ -1,6 +1,6 @@
 <template>
   <section id="login" v-bind:class="isShake">
-    <form>
+    <form dir="ltr">
       <h2>ورود</h2>
       <div class="info" v-bind:class="good">
         <p>{{ alert.message }}</p>
@@ -8,12 +8,14 @@
       <input type="text" v-model="login.username" placeholder="نام کاربری" />
       <input type="password" v-model="login.password" placeholder="پسوورد" />
       <button v-on:click="onSubmit">ورود</button>
+      <div v-if="loggingIn">logging ....</div>
+      <div v-if="loginError">Error ....</div>
     </form>
   </section>
 </template>
 
 <script>
-import { accountService } from "../../core/services/account/accountService";
+  import { mapState, mapActions } from 'vuex';
 export default {
   data: () => ({
     alert: {
@@ -30,19 +32,27 @@ export default {
       password: "admin"
     }
   }),
-  computed: {
-    isShake: function() {
+    computed: {
+      ...mapState([
+        'loggingIn',
+        'loginError',
+        'accessToken'
+      ]),
+       isShake: function() {
       console.log(this.shake);
       if (this.shake == true) {
         return "shake";
       }
       return "none";
     }
-  },
+    },
   methods: {
+    ...mapActions([
+        'doLogin'
+      ]),
     onSubmit: function(event) {
       event.preventDefault();
-      accountService.login(this.login).then(res => console.log(res));
+      this.doLogin(this.login);
     }
   }
 };

@@ -1,4 +1,4 @@
-const PROXY = "http://localhost:8080";
+const PROXY = "http://localhost:8085/";
 module.exports = {
   devServer: {
     proxy: {

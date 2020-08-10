@@ -12,8 +12,8 @@ export const accountService = {
 };
 function login(credential) {
   return axios
-    .post(`/api/user/login`, {
-      email: credential.username,
+    .post(`/api/employee/login`, {
+      username: credential.username,
       password: credential.password
     })
     .then(res => {
@@ -28,7 +28,7 @@ function logout() {
     return request;
   });
   localStorage.removeItem("user");
-  localStorage.removeItem("auth");
+  localStorage.removeItem("accessToken");
 }
 
 function register(credential) {
@@ -45,10 +45,10 @@ function register(credential) {
 }
 
 function submitUser(res) {
-  localStorage.setItem("auth", JSON.stringify({ token: res.data.token }));
+  localStorage.setItem("accessToken", JSON.stringify(res.data.token ));
   localStorage.setItem("user", JSON.stringify(res.data.user));
   setAuthInterceptor();
-  return;
+  return res.data.token;
 }
 
 function resetPasswordSendUsername(username) {
