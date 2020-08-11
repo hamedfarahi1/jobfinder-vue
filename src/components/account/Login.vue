@@ -1,16 +1,39 @@
 <template>
   <section id="login" v-bind:class="isShake">
-    <form dir="ltr">
-      <h2>ورود</h2>
-      <div class="info" v-bind:class="good">
-        <p>{{ alert.message }}</p>
+    <div class="loginForm">
+        <form>
+          <div>
+            <label>
+              {{username && <span>نام کاربری</span>}}
+              <input
+                class=""
+                id="username"
+                placeholder="ایمیل"
+                v-model="login.username"
+                type="email"
+              />
+              <p>
+                نام کاربری نمیتواند خالی باشد
+              </p>
+            </label>
+            <label>
+              {{login.password ? <span>پسوورد</span> : ''}}
+              <input
+                id="password"
+                placeholder="پسوورد"
+                v-model="login.password"
+                type="password"
+              />
+              <p>
+                پسوورد نمیتواند خالی باشد
+              </p>
+            </label>
+          </div>
+          <button v-on:click="onSubmit">ورود</button>
+      <div v-if="loggingIn">ورود ....</div>
+      <div v-if="loginError">خطا ....</div>
+        </form>
       </div>
-      <input type="text" v-model="login.username" placeholder="نام کاربری" />
-      <input type="password" v-model="login.password" placeholder="پسوورد" />
-      <button v-on:click="onSubmit">ورود</button>
-      <div v-if="loggingIn">logging ....</div>
-      <div v-if="loginError">Error ....</div>
-    </form>
   </section>
 </template>
 
@@ -57,112 +80,41 @@ export default {
 };
 </script>
 
-<style scoped>
-section {
-  background-color: #f9f9f9;
-  width: 30%;
-  min-width: 400px;
-  margin: auto;
-  min-height: 25%;
-  display: flex;
-  flex-direction: column;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-}
-
-h2 {
-  font-family: "Archivo Black", sans-serif;
-  color: #868b8e;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.info {
+<style lang="scss" scoped>
+.loginForm {
   width: 100%;
-  padding: 1em 5px;
-  text-align: center;
-  min-height: 45px;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-}
-
-.info.error {
-  border: 1px solid #a90e0e;
-  background-color: #ff3c41;
-  color: #a90e0e;
-}
-.info p {
-  margin: auto;
-  padding: 5px;
-}
-
-.info.good {
-  border: 1px solid #416d50;
-  background-color: #47cf73;
-  color: #416d50;
-}
-
-input {
-  height: 35px;
-  padding: 5px 5px;
-  margin: 10px 0px;
-  background-color: #e0dada;
-  border: none;
-}
-
-button {
-  height: 40px;
-  padding: 5px 5px;
-  margin: 10px 0px;
-  font-weight: bold;
-  background-color: #be5256;
-  border: none;
-  color: #e0dada;
-  cursor: pointer;
-  font-size: 16px;
-}
-button:hover {
-  background-color: #711f1b;
-}
-
-@keyframes shake {
-  from,
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+  justify-content: flex-start;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      label {
+        &:first-of-type {
+          margin-left: 20px;
+        }
+      }
+      @media screen and(max-width:395px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        label {
+          margin: 0 0 20px 0 !important;
+        }
+      }
+    }
+    button {
+      @extend %gradientButton;
+      margin-bottom: 25px;
+    }
   }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    -webkit-transform: translate3d(-10px, 0, 0);
-    transform: translate3d(-10px, 0, 0);
-  }
-  20%,
-  40%,
-  60%,
-  80% {
-    -webkit-transform: translate3d(10px, 0, 0);
-    transform: translate(10px, 0, 0);
-  }
-}
-
-.shake {
-  animation-name: shake;
-  animation-duration: 1s;
-  /*animation-fill-mode: both;*/
-}
-
-@media screen and (max-width: 780px) {
-  section {
-    width: 90%;
-  }
+  @extend %inputStyles;
 }
 </style>
