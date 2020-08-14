@@ -1,12 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from './store';
+import store from './core/store/store';
 
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
   store.dispatch('fetchAccessToken');
+  
   if (to.fullPath === '/jobs') {
     if (store.state.accessToken === null) {
       return next('/login');
@@ -15,6 +16,9 @@ router.beforeEach((to, from, next) => {
   if(to.fullPath === '/about')
     if (!store.state.accessToken)
       return next('/login')
+
+  if(to.fullPath === from.fullPath)
+    return
   next();
 });
 

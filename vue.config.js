@@ -1,4 +1,4 @@
-const PROXY = "http://localhost:8081/";
+const PROXY = "https://jobshaar.herokuapp.com/";
 module.exports = {
   devServer: {
     proxy: {

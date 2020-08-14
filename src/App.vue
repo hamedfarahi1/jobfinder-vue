@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div v-if="accessToken" id="nav">
       <router-link to="/login">
        ورود
+      </router-link> |
+      <router-link to="/register">
+       ثبت نام
       </router-link> |
       <router-link to="/about">درباره</router-link> |
       <router-link to="/">صفحه اصلی</router-link>  |
@@ -13,18 +16,26 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
+import { mapActions ,mapState} from 'vuex';
 export default {
   methods: {
     ...mapActions([
       'logout'
     ])
   },
+  computed: {
+      ...mapState([
+        'accessToken'
+      ])
+    },
 }
 </script>
 
 <style>
+body{
+    background: #f6f5f7;
+
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

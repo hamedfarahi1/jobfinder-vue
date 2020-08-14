@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { accountService } from './core/services/account/accountService'
-import router from './router';
+import { accountService } from '../services/account/accountService'
+import router from '../../router';
 
 Vue.use(Vuex)
 
