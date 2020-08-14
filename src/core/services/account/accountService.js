@@ -1,3 +1,4 @@
+import { setAuthInterceptor } from '../../interceptors/interceptorsSetter'
 const axios = require("../client");
 
 export const accountService = {
@@ -5,7 +6,6 @@ export const accountService = {
   logout,
   register,
   getUserInfo,
-  setAuthInterceptor,
   resetPasswordSendUsername,
   resetPass,
   changePass
@@ -61,22 +61,6 @@ function resetPass(values) {
 
 function changePass(values) {
   return axios.put("/api/account/change-password", values);
-}
-
-function setAuthInterceptor() {
-  function getToken() {
-    const auth = JSON.parse(localStorage.getItem("auth"));
-    try {
-      return auth.token;
-    } catch (e) {
-      return null;
-    }
-  }
-  axios.interceptors.request.use(request => {
-    let tkn = getToken();
-    request.headers["Authorization"] = tkn ? "Bearer " + tkn : "";
-    return request;
-  });
 }
 
 function getUserInfo() {

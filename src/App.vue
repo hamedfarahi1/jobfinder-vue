@@ -17,6 +17,8 @@
 
 <script>
 import { mapActions ,mapState} from 'vuex';
+import { interceptorsSetter } from './core/interceptors/interceptorsSetter'
+
 export default {
   methods: {
     ...mapActions([
@@ -28,6 +30,9 @@ export default {
         'accessToken'
       ])
     },
+    mounted() {
+      interceptorsSetter()
+    }
 }
 </script>
 

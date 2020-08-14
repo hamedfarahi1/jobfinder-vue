@@ -1,13 +1,10 @@
-import { uiActions, userActions } from "../_actions";
-import { store } from "../_helpers";
-import { errorConstants } from "../_constants";
-import { errorCodeKeyValues } from "./errors-keyValue";
-
+import store from "../store/store";
+import {errorCodeKeyValues} from './errors-keyValue'
 export const errorHandlerInterceptor = error => {
   const statusCode = error.response.status;
   createErrorMessage(statusCode);
   if (statusCode === 401) {
-    store.dispatch(userActions.logout());
+    store.dispatch('logout');
   }
   return Promise.reject({ ...error });
 };
@@ -15,9 +12,10 @@ export const errorHandlerInterceptor = error => {
 const createErrorMessage = statusCode => {
   const errMsg = errorCodeKeyValues[statusCode];
   if (errMsg) showErrorMessage(errMsg);
-  else showErrorMessage(errorConstants.ERROR);
+  else showErrorMessage('خطا');
 };
 
 const showErrorMessage = message => {
-  store.dispatch(uiActions.errorSnackbar(message));
+  // store.dispatch(uiActions.errorSnackbar(message));
+  console.log(message)
 };

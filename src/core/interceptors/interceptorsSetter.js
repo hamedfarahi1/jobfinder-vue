@@ -1,6 +1,4 @@
 import { errorHandlerInterceptor } from "./errorHandlerInterceptor";
-import { accountService } from "../services/account/accountService";
-
 const axios = require("../services/client");
 
 export function interceptorsSetter() {
@@ -8,5 +6,22 @@ export function interceptorsSetter() {
     response => response,
     error => errorHandlerInterceptor(error)
   );
-  accountService.setAuthInterceptor();
+  setAuthInterceptor();
+}
+
+
+export function setAuthInterceptor() {
+  function getToken() {
+    const auth = JSON.parse(localStorage.getItem("auth"));
+    try {
+      return auth.token;
+    } catch (e) {
+      return null;
+    }
+  }
+  axios.interceptors.request.use(request => {
+    let tkn = getToken();
+    request.headers["Authorization"] = tkn ? "Bearer " + tkn : "";
+    return request;
+  });
 }
