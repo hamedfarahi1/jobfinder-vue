@@ -12,7 +12,7 @@ export const accountService = {
 };
 function login(credential) {
   return axios
-    .post(`/api/employee/login`, {
+    .post(`/api/employer/login`, {
       username: credential.username,
       password: credential.password
     })
@@ -33,7 +33,7 @@ function logout() {
 
 function register(credential) {
   return axios
-    .post(`/api/user/register`, {
+    .post(`/api/employer/register`, {
       username: credential.username,
       password: credential.password,
       email: credential.email,

@@ -9,13 +9,20 @@ export default new Vuex.Store({
   state: {
     accessToken: null,
     loggingIn: false,
-    loginError: null
+    loginError: null,
+    registering: false,
+    registerError: null
   },
   mutations: {
     loginStart: state => state.loggingIn = true,
     loginStop: (state, errorMessage) => {
       state.loggingIn = false;
       state.loginError = errorMessage;
+    },
+    registerStart: state => state.registering = true,
+    registerStop: (state, errorMessage) => {
+      state.registering = false;
+      state.registerError = errorMessage;
     },
     updateAccessToken: (state, accessToken) => {
       state.accessToken = accessToken;
@@ -39,6 +46,20 @@ export default new Vuex.Store({
           commit('updateAccessToken', null);
         })
       },
+      doRegister({ commit }, regData) {
+        commit('registerStart');
+  
+        accountService.register(regData)
+          .then(response => {
+            commit('registerStop', null);
+            commit('updateAccessToken', response);
+            router.push('/jobs');
+          })
+          .catch(error => {
+            commit('registerStop', error);
+            commit('updateAccessToken', null);
+          })
+        },
       fetchAccessToken({ commit }) {
         commit('updateAccessToken', localStorage.getItem('accessToken'));
       },
