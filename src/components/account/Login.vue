@@ -2,7 +2,7 @@
   <section id="login">
 <div class="container" id="container">
 	<div class="form-container sign-in-container">
-		<form v-if="!loggingIn" action="#">
+		<form v-if="!loggingIn" action="#" class="mobile">
 			<h1>وارد شوید</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -19,7 +19,7 @@
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
-			<div class="overlay-panel overlay-right">
+			<div class="overlay-panel mobile overlay-right">
 				<h1>سلام دوست عزیز</h1>
 				<p>اطلاعات خود را وارد کنید و از سرویس رایگان ما استفاده کنید</p>
 				<router-link to="/register">

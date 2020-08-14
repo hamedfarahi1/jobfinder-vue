@@ -81,6 +81,13 @@ form {
 	text-align: center;
 }
 
+@media only screen and (max-width: 600px) {
+	form.mobile, .overlay-panel.mobile {
+		padding: 0 7px;
+	}
+	
+}
+
 input {
 	background-color: #eee;
 	border: none;
@@ -243,17 +250,4 @@ footer {
     right: 0;
     text-align: center;
     z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
 }

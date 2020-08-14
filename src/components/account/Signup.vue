@@ -2,7 +2,7 @@
   <section id="signup">
 <div class="container right-panel-active" id="container">
 	<div class="form-container sign-up-container">
-		<form v-if="!registering" action="#">
+		<form v-if="!registering" action="#" class="mobile">
 			<h1>ثبت نام کنید</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -19,7 +19,7 @@
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
-			<div class="overlay-panel overlay-left">
+			<div class="overlay-panel mobile overlay-left">
 				<h1>خوش آمدید</h1>
 				<p>برای برقراری ارتباط دو باره با ما, لطفا وارد شوید</p>
 				<router-link to="/login"><button class="ghost" id="signIn">

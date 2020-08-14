@@ -52,7 +52,7 @@ nav {
     display: flex;
 
     li {
-      margin: 50px;
+      margin: calc(1vw + 15px);
 
       a {
         .router-link-exact-active {
@@ -60,7 +60,7 @@ nav {
     }
         text-decoration: none;
         color: #8f8f8f;
-        font-size: 24px;
+        font-size: calc(1vw + 10px);
         font-weight: 400;
         transition: all 0.5s ease-in-out;
         position: relative;
