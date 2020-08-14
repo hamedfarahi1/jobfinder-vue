@@ -2,7 +2,7 @@
   <section id="signup">
 <div class="container right-panel-active" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#">
+		<form v-if="!registering" action="#">
 			<h1>ثبت نام کنید</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -13,14 +13,15 @@
 			<input v-model="register.email" type="email" placeholder="ایمیل" />
 			<input v-model="register.username" type="text" placeholder="نام کاربری" />
 			<input v-model="register.password" type="password" placeholder="پسوورد" />
-			<button @click="onSubmit">Sign Up</button>
+			<button @click="onSubmit">تکمیل ثبت نام</button>
 		</form>
+        <Spinner v-if="registering"/>
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
+				<h1>خوش آمدید</h1>
+				<p>برای برقراری ارتباط دو باره با ما, لطفا وارد شوید</p>
 				<router-link to="/login"><button class="ghost" id="signIn">
        ورود</button>
       </router-link>
@@ -34,7 +35,12 @@
 
 <script>
   import { mapState, mapActions } from 'vuex';
+import Spinner from '../../shared/templates/Spinner'
+
 export default {
+    components: {
+        Spinner
+    },
   data: () => ({
     register: {
       email: "",
@@ -44,19 +50,18 @@ export default {
   }),
     computed: {
       ...mapState([
-        'registeringIn',
-        'registerError',
-        'accessToken'
+        'registering',
+        'registerError'
       ])
     },
   methods: {
     ...mapActions([
-        'doLogin',
+        'doRegister',
         'logout'
       ]),
     onSubmit: function(event) {
       event.preventDefault();
-      this.doLogin(this.login);
+      this.doRegister(this.register);
     }
   }
 };

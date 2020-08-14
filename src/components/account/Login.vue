@@ -49,15 +49,8 @@ export default {
     computed: {
       ...mapState([
         'loggingIn',
-        'loginError',
-        'accessToken'
-      ]),
-       isLogging: function() {
-      if (this.loggingIn) {
-        return "blur-section";
-      }
-      return "none";
-    }
+        'loginError'
+      ])
     },
   methods: {
     ...mapActions([
