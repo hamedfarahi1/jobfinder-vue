@@ -8,5 +8,13 @@ module.exports = {
         changeOrigin: true
       }
     }
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `@import "src/assets/styles/_vars.scss";`,
+        additionalData: `@import "src/assets/styles/_placeholders.scss";`
+      }
+    }
   }
 };
