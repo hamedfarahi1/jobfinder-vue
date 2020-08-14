@@ -1,15 +1,15 @@
 <template>
   <div id="app">
+    <nav v-if="accessToken">
+    <ul class="menuItems">
+      <li><router-link to="/">صفحه اصلی</router-link></li>
+      <li>
+      <router-link to="/about">درباره</router-link></li>
+      <li><a href="#" @click="logout">خروج</a></li>
+    </ul>
+  </nav>
     <div v-if="accessToken" id="nav">
-      <router-link to="/login">
-       ورود
-      </router-link> |
-      <router-link to="/register">
-       ثبت نام
-      </router-link> |
-      <router-link to="/about">درباره</router-link> |
-      <router-link to="/">صفحه اصلی</router-link>  |
-      <button @click="logout"> خروج</button>
+      
     </div>
     <router-view />
   </div>
@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 body{
     background: #f6f5f7;
 
@@ -44,16 +44,49 @@ body{
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-}
+nav {
+  background: #f9f9f9;
+  margin-bottom: 25px;
+  .menuItems {
+    list-style: none;
+    display: flex;
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+    li {
+      margin: 50px;
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+      a {
+        .router-link-exact-active {
+        color: #42b983 !important;
+    }
+        text-decoration: none;
+        color: #8f8f8f;
+        font-size: 24px;
+        font-weight: 400;
+        transition: all 0.5s ease-in-out;
+        position: relative;
+        text-transform: uppercase;
+
+        &::before {
+          content: attr(data-item);
+          transition: 0.5s;
+          color: #8254ff;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 0;
+          overflow: hidden;
+        }
+
+        &:hover {
+          &::before {
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
